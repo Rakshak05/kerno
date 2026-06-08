@@ -19,7 +19,7 @@ var procDir = "/proc"
 // "unknown" rather than "zero open fds".
 func CountProcFDs(pid uint32) (int, error) {
 	dir := fmt.Sprintf("%s/%d/fd", procDir, pid)
-	f, err := os.Open(dir)
+	f, err := os.Open(dir) //nolint:gosec // dir is constructed from the controlled procDir
 	if err != nil {
 		return 0, err
 	}
@@ -36,7 +36,7 @@ func CountProcFDs(pid uint32) (int, error) {
 // /proc/<pid>/limits. Returns (limit, nil) on success; (0, err) on failure.
 func ReadProcFDLimit(pid uint32) (int, error) {
 	path := fmt.Sprintf("%s/%d/limits", procDir, pid)
-	f, err := os.Open(path)
+	f, err := os.Open(path) //nolint:gosec // path is constructed from the controlled procDir
 	if err != nil {
 		return 0, err
 	}

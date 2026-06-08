@@ -78,7 +78,7 @@ func TestPredict_FDExhaustion(t *testing.T) {
 				Timestamp: now.Add(10 * time.Second),
 				FD: &collector.FDSnapshot{
 					GrowthRate: 10.0,
-					NetDelta:    100, // snapshot level NetDelta
+					NetDelta:   100, // snapshot level NetDelta
 					Entries: []collector.FDEntry{
 						{PID: 1234, Comm: "leak-proc", GrowthRate: 10.0, NetDelta: 100, CurrentFDs: 0},
 					},

@@ -53,58 +53,58 @@ func TestETADurationAcceptsCeiling(t *testing.T) {
 
 func TestFDHeadroom(t *testing.T) {
 	tests := []struct {
-		name             string
-		currentFDs       int64
-		netDelta         int64
-		fdLimit          int
-		expectedRemain   float64
-		expectedLimit    float64
-		expectedExact    bool
+		name string
+		currentFDs int64
+		netDelta int64
+		fdLimit int
+		expectedRemain float64
+		expectedLimit float64
+		expectedExact bool
 	}{
 		{
-			name:           "Case 1: Both currentFDs and fdLimit set",
-			currentFDs:     64000,
-			netDelta:       100,
-			fdLimit:        70000,
+			name: "Case 1: Both currentFDs and fdLimit set",
+			currentFDs: 64000,
+			netDelta: 100,
+			fdLimit: 70000,
 			expectedRemain: 6000,
-			expectedLimit:  70000,
-			expectedExact:  true,
+			expectedLimit: 70000,
+			expectedExact: true,
 		},
 		{
-			name:           "Case 2: currentFDs set, fdLimit = 0 (defaults to 65536)",
-			currentFDs:     64000,
-			netDelta:       100,
-			fdLimit:        0,
+			name: "Case 2: currentFDs set, fdLimit = 0 (defaults to 65536)",
+			currentFDs: 64000,
+			netDelta: 100,
+			fdLimit: 0,
 			expectedRemain: 1536,
-			expectedLimit:  65536,
-			expectedExact:  true,
+			expectedLimit: 65536,
+			expectedExact: true,
 		},
 		{
-			name:           "Case 3: currentFDs = 0, fdLimit set (falls back to netDelta with known limit)",
-			currentFDs:     0,
-			netDelta:       500,
-			fdLimit:        80000,
+			name: "Case 3: currentFDs = 0, fdLimit set (falls back to netDelta with known limit)",
+			currentFDs: 0,
+			netDelta: 500,
+			fdLimit: 80000,
 			expectedRemain: 79500,
-			expectedLimit:  80000,
-			expectedExact:  false,
+			expectedLimit: 80000,
+			expectedExact: false,
 		},
 		{
-			name:           "Case 4: Neither set (falls back to netDelta with 65536 default limit)",
-			currentFDs:     0,
-			netDelta:       500,
-			fdLimit:        0,
+			name: "Case 4: Neither set (falls back to netDelta with 65536 default limit)",
+			currentFDs: 0,
+			netDelta: 500,
+			fdLimit: 0,
 			expectedRemain: 65036,
-			expectedLimit:  65536,
-			expectedExact:  false,
+			expectedLimit: 65536,
+			expectedExact: false,
 		},
 		{
-			name:           "Case 5: remaining <= 0 (returns remaining = 1)",
-			currentFDs:     66000,
-			netDelta:       100,
-			fdLimit:        65536,
+			name: "Case 5: remaining <= 0 (returns remaining = 1)",
+			currentFDs: 66000,
+			netDelta: 100,
+			fdLimit: 65536,
 			expectedRemain: 1,
-			expectedLimit:  65536,
-			expectedExact:  true,
+			expectedLimit: 65536,
+			expectedExact: true,
 		},
 	}
 
